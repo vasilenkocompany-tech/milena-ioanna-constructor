@@ -167,8 +167,8 @@ footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--lin
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* cart modal */
-.look-modal{position:fixed;z-index:1000;inset:0;display:none;align-items:center;justify-content:center;
-  padding:22px;isolation:isolate}
+.look-modal{position:absolute;z-index:1000;left:0;right:0;bottom:auto;height:900px;display:none;align-items:center;justify-content:center;
+  padding:22px;isolation:isolate;}
 .look-modal.is-open{display:flex}
 .look-modal__backdrop{position:absolute;z-index:0;inset:0;border:0;background:rgba(24,31,34,.42);
   cursor:pointer;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
@@ -609,6 +609,9 @@ window.MI_DATA={"top":[{"n":"Silk touch shirt black","img":"data:image/jpeg;base
     modalRows.forEach(function(row,index){lookModalItems.appendChild(renderModalRow(row,index));});
     var total=modalRows.reduce(function(sum,row){return sum+Number(row.item.p||0);},0);
     lookModalTotal.textContent=rub(total);
+    var btnRect = addLookBtn.getBoundingClientRect();
+    lookModal.style.top =
+    Math.max(0, btnRect.top - 120) + "px";
     lookModal.classList.add("is-open");
     lookModal.setAttribute("aria-hidden","false");
     document.body.classList.add("mi-look-modal-open");
